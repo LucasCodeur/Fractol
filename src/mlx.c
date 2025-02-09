@@ -41,7 +41,7 @@ void	init_screen_mlx(t_mlx *t_mlx)
 	t_mlx->mlx_win = mlx_new_window(t_mlx->mlx, MAX_WIDTH, MAX_HEIGHT, "Fractol");
 	if (!t_mlx->mlx_win)
 		return ;
-	t_mlx->img.img = mlx_new_image(t_mlx->mlx, 1920, 1080);
+	t_mlx->img.img = mlx_new_image(t_mlx->mlx, MAX_WIDTH, MAX_HEIGHT);
 	t_mlx->img.addr = mlx_get_data_addr(t_mlx->img.img, &(t_mlx->img.bits_per_pixel), &(t_mlx->img.line_length),
 									 &(t_mlx->img.endian));
 	if (!t_mlx->img.addr)
@@ -57,9 +57,9 @@ void make_complex_plan(t_mlx *window)
 
 	x = 0.0;
 	y = 0.0;
-	screen_x = (int)(x + MAX_WIDTH / 2);
-	screen_y = (int)(-y + MAX_HEIGHT / 2);
-	if (screen_x >= 0 && screen_x < 1920 && screen_y >= 0 && screen_y < 1080)
+	screen_x = (int)(x * SCALE + MAX_WIDTH / 2);
+	screen_y = (int)(-y * SCALE + MAX_HEIGHT / 2);
+	if (screen_x >= 0 && screen_x < MAX_WIDTH && screen_y >= 0 && screen_y < MAX_HEIGHT)
 		my_mlx_pixel_put(&(window->img), screen_x, screen_y, 0xFFFFFF);
 	mlx_put_image_to_window(window->mlx, window->mlx_win, window->img.img, 0, 0);
 }

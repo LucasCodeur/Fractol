@@ -16,6 +16,7 @@
 # define SCALE 270
 # define MAX_WIDTH 1920
 # define MAX_HEIGHT 1920
+# define MAX_ITER 256
 
 
 #include <../mlx_linux/mlx.h>
@@ -45,17 +46,24 @@ typedef	struct s_mlx
 	t_img	img;
 }				t_mlx;
 
-typedef struct s_coordinate
+typedef struct s_coord
 {
-	ssize_t	x;
-	ssize_t	y;
-	ssize_t	c;
-}	t_coordinate;
+	double	x;
+	double	y;
+	double	c;
+	int		offset_x;
+	int		offset_y;
+	int		c_r;
+	int		c_i;
+	int		z_r;
+	int		z_i;
+}	t_coord;
 
 void	init_mlx(t_mlx *t_mlx);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	free_mlx(t_mlx *t_mlx);
 void	init_screen_mlx(t_mlx *t_mlx);
 void	make_complex_plan(t_mlx *window);
+void	mandelbrot(t_mlx *window);
 
 #endif

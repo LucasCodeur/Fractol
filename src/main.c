@@ -17,7 +17,7 @@ int main(void)
     t_mlx window;
 
     init_screen_mlx(&window);
-    make_complex_plan(&window);
+	mandelbrot(&window);
     mlx_loop(window.mlx);
     return (0);
 }
