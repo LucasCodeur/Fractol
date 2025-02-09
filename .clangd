@@ -1,0 +1,7 @@
+CompileFlags:
+  Add:
+    - "-I../include"
+    - "-I../src/libft.h"
+    - "-I../../include"
+    - "-I../../libft/libft.h"
+    - "-I../src/mlx_linux/mlx.h"
