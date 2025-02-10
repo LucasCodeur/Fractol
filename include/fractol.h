@@ -48,15 +48,13 @@ typedef	struct s_mlx
 
 typedef struct s_coord
 {
-	double	x;
-	double	y;
-	double	c;
+	int	x;
+	int	y;
 	int		offset_x;
 	int		offset_y;
-	int		c_r;
-	int		c_i;
-	int		z_r;
-	int		z_i;
+	int		r;
+	int		i;
+	double	c;
 }	t_coord;
 
 void	init_mlx(t_mlx *t_mlx);

@@ -14,22 +14,12 @@
 
 void	mandelbrot(t_mlx *window)
 {
-	t_coord	coord;
-	int		i;
-	int		tmp;
+	t_coord	z;
 
-	coord.c_r = coord.x;
-	coord.c_i = coord.y;
-	coord.z_r = 0;
-	coord.z_i = 0;
-	i = 0;
-	tmp = coord.z_r;
-	coord.z_r = coord.z_r*coord.z_r - coord.z_i*coord.z_i + coord.c_r;
-	coord.z_i = 2*coord.z_i*tmp + coord.c_i;
-	i = i + 1;
-	while (coord.z_r*coord.z_r + coord.z_i*coord.z_i < 4 && i < MAX_ITER)
+	z.x = MAX_WIDTH / 2;
+	z.y = MAX_HEIGHT / 2;
+	while (z.r < MAX_WIDTH && z.r < MAX_ITER)
 	{
-		if (i == MAX_ITER)
-			my_mlx_pixel_put(&window->img, coord.c_r, coord.c_i, 0X000000);
+		while ()
 	}
 }
