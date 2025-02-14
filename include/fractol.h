@@ -20,6 +20,7 @@
 # define MAX_RE 1.0
 # define MIN_IM -1.5
 # define MAX_IM 1.5
+# define BLACK 0x000000
 
 
 #include <../mlx_linux/mlx.h>
@@ -59,8 +60,8 @@ typedef struct s_coord
 
 typedef struct	s_cn
 {
-	int	r;
-	int	i;
+	double	r;
+	double	i;
 }				t_cn;
 
 void	init_mlx(t_mlx *t_mlx);

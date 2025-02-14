@@ -15,7 +15,21 @@
 void map_to_complex(int x, int y, double *Re, double *Im)
 {
     *Re = MIN_RE + (x / (double)MAX_WIDTH) * (MAX_RE - MIN_RE);
-    *Im = MIN_IM + (y / (double)MAX_HEIGHT) * (MAX_IM - MIN_IM);
+    *Im = MAX_IM - (y / (double)MAX_HEIGHT) * (MAX_IM - MIN_IM);
+}
+
+int get_color(int i)
+{
+	if (i == MAX_ITER)
+		return 0x000000; 
+	int r; 
+	int g;
+	int b;
+
+	r = (i * 9) % 256;
+	g = (i * 2) % 256;
+	b = (i * 4) % 256;
+	return (r << 16) | (g << 8) | b;
 }
 
 void	mandelbrot(t_mlx *window)
@@ -48,12 +62,12 @@ void	mandelbrot(t_mlx *window)
 				i++;
 			}
 			if (i == MAX_ITER)
-				my_mlx_pixel_put(&window->img, coord.x, coord.y, 0xFFFFFF);
+				my_mlx_pixel_put(&window->img, coord.x, coord.y, BLACK);
 			else
-				my_mlx_pixel_put(&window->img, coord.x, coord.y, 0x000000);
+				my_mlx_pixel_put(&window->img, coord.x, coord.y, get_color(i));
 			coord.x++;
 		}
 		coord.y++;
 	}
-	mlx_put_image_to_window(&window->mlx, &window->mlx_win, &window->img, 0, 0);
+	mlx_put_image_to_window(window->mlx, window->mlx_win, window->img.img, 0, 0);
 }

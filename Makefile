@@ -12,46 +12,49 @@
 
 NAME := fractol
 SRC_DIR := src
-FTPRINTF_DIR := ft_printf/
-OBJ_DIR := obj/
-DEP_DIR := dep/
-INC_DIR := include/
-HEADERS := $(INC_DIR)fractol.h
-SRC := $(SRC_DIR)fractol.c $(SRC_DIR)main.c $(SRC_DIR)mlx.c
-SRC_FTPRINTF := PRINTF
-OBJ := $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
-DEP := $(OBJ:$(OBJ_DIR)%.o=$(DEP_DIR)%.d)
-MAKE := $(MAKE) -j --no-print-directory
+FTPRINTF_DIR := ft_printf
+OBJ_DIR := obj
+LIBFT_DIR := libft/
+DEP_DIR := dep
+INC_DIR := include
+
+HEADERS := $(INC_DIR)/fractol.h
+SRC := $(SRC_DIR)/fractol.c $(SRC_DIR)/main.c $(SRC_DIR)/mlx.c
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+DEP := $(OBJ:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
+
+MAKE := make -j --no-print-directory
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g
-INC := -I$(INC_DIR)
+CFLAGS := -Wall -Wextra -Werror -g -O3
+INC := -I$(INC_DIR) -I/usr/include -Imlx_linux
+LIBS := -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
+LIBFT := $(LIBFT_DIR)libft.a
 
-$(NAME): $(OBJ) $(FTPRINTF)
-	$(CC) $(CFLAGS) $(INC) $^ -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $@
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(INC) $^ $(LIBS) -o $@
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR) $(DEP_DIR)
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
-	$(CC) -MM $(CFLAGS) $(INC) $< > $(DEP_DIR)$*.d
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(DEP_DIR)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	$(CC) -MM $(CFLAGS) $(INC) $< -MF $(DEP_DIR)/$*.d
 
-$(FT_PRINT) : FORCE
-	$(MAKE) -C $(FTPRINTF_DIR)
+$(LIBFT): FORCE
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(OBJ_DIR) $(DEP_DIR):
 	@mkdir -p $@
 
 clean:
-	$(MAKE) -C $(FTPRINTF_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) clean
 	rm -rf $(OBJ_DIR) $(DEP_DIR)
 
 fclean: clean
-	$(MAKE) -C $(FTPRINTF_DIR) fclean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 	rm -rf $(NAME)
 
-re: fclean all
+re: fclean $(NAME)
 
-FORCE:
+FORCE: 
 
 -include $(DEP)
 
 .PHONY: all clean fclean re
-
