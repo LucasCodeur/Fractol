@@ -16,6 +16,8 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
+	if (x < 0 || x >= MAX_WIDTH  || y < 0 || y >= MAX_HEIGHT)
+		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
@@ -42,8 +44,8 @@ void	init_screen_mlx(t_mlx *t_mlx)
 	if (!t_mlx->mlx_win)
 		return ;
 	t_mlx->img.img = mlx_new_image(t_mlx->mlx, MAX_WIDTH, MAX_HEIGHT);
-	t_mlx->img.addr = mlx_get_data_addr(t_mlx->img.img, &(t_mlx->img.bits_per_pixel), &(t_mlx->img.line_length),
-									 &(t_mlx->img.endian));
+	t_mlx->img.addr = mlx_get_data_addr(t_mlx->img.img, &t_mlx->img.bits_per_pixel, &t_mlx->img.line_length,
+									 &t_mlx->img.endian);
 	if (!t_mlx->img.addr)
 		return ;
 }

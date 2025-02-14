@@ -12,22 +12,26 @@
 
 #ifndef FRACTOL_H 
 # define FRACTOL_H
-# define C(x, y) ((x) + (y));
 # define SCALE 270
 # define MAX_WIDTH 1920
 # define MAX_HEIGHT 1920
-# define MAX_ITER 256
+# define MAX_ITER 50
+# define MIN_RE -2.0
+# define MAX_RE 1.0
+# define MIN_IM -1.5
+# define MAX_IM 1.5
 
 
 #include <../mlx_linux/mlx.h>
 #include <math.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <stdio.h>
 
 typedef enum e_bool
 {
-	false,
-	true
+	FALSE,
+	TRUE
 }	t_bool;
 
 typedef struct s_img 
@@ -48,14 +52,16 @@ typedef	struct s_mlx
 
 typedef struct s_coord
 {
-	int	x;
-	int	y;
-	int		offset_x;
-	int		offset_y;
-	int		r;
-	int		i;
-	double	c;
+	int		x;
+	int		y;
+
 }	t_coord;
+
+typedef struct	s_cn
+{
+	int	r;
+	int	i;
+}				t_cn;
 
 void	init_mlx(t_mlx *t_mlx);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
