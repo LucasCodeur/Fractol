@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/08 17:17:40 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/02/17 19:10:12 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,15 @@
 # define MAX_IM 1.5
 # define BLACK 0x000000
 
-
+#include "../libft/libft.h"
 #include <../mlx_linux/mlx.h>
 #include <math.h>
 #include <stdlib.h>
 #include <sys/types.h>
-#include <stdio.h>
 
-typedef enum e_bool
-{
-	FALSE,
-	TRUE
-}	t_bool;
+
+
+#include <stdio.h>
 
 typedef struct s_img 
 {
@@ -66,9 +63,11 @@ typedef struct	s_cn
 
 void	init_mlx(t_mlx *t_mlx);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	free_mlx(t_mlx *t_mlx);
+void	free_img(t_mlx *t_mlx);
 void	init_screen_mlx(t_mlx *t_mlx);
 void	make_complex_plan(t_mlx *window);
 void	mandelbrot(t_mlx *window);
+int	key_press(int keycode, void *param);
+int	close_win(void *param);
 
 #endif
