@@ -19,7 +19,7 @@ DEP_DIR := dep
 INC_DIR := include
 
 HEADERS := $(INC_DIR)/fractol.h
-SRC := $(SRC_DIR)/fractol.c $(SRC_DIR)/main.c $(SRC_DIR)/mlx.c
+SRC = $(shell find $(SRC_DIR) -name "*.c")
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEP := $(OBJ:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 
@@ -34,8 +34,11 @@ $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(INC) $^ $(LIBS) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(DEP_DIR)
+	@mkdir -p $(dir $@)  # Creates the necessary directories for obj
+	@mkdir -p $(dir $(DEP_DIR)/$*.d)  # Creates the necessary directories for dep
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	$(CC) -MM $(CFLAGS) $(INC) $< -MF $(DEP_DIR)/$*.d
+
 
 $(LIBFT): FORCE
 	$(MAKE) -C $(LIBFT_DIR)

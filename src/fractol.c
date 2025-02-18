@@ -6,33 +6,13 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:46:22 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/17 14:41:09 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/02/18 20:40:40 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-void	map_to_complex(int x, int y, double *re, double *im)
-{
-	*re = MIN_RE + ((double)x / (double)MAX_WIDTH) * (MAX_RE - MIN_RE);
-	*im = MAX_IM - ((double)y / (double)MAX_HEIGHT) * (MAX_IM - MIN_IM);
-}
-
-int	get_color(int i)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	if (i == MAX_ITER)
-		return (0x000000);
-	r = (i * 9) % 256;
-	g = (i * 2) % 256;
-	b = (i * 4) % 256;
-	return ((r << 16) | (g << 8) | b);
-}
-
-void	mandelbrot_formula(t_cn c, size_t *i)
+static void	mandelbrot_formula(t_cn c, size_t *i)
 {
 	t_cn	z;
 	t_cn	temp;
@@ -61,7 +41,7 @@ void	mandelbrot(t_mlx *win)
 		coord.x = 0;
 		while (coord.x < MAX_WIDTH)
 		{
-			map_to_complex(coord.x, coord.y, &c.r, &c.i);
+			map_to_complex(coord.x, coord.y, &c.r, &c.i, win);
 			i = 0;
 			mandelbrot_formula(c, &i);
 			if (i == MAX_ITER)

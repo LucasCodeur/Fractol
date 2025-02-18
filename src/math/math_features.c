@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   math_features.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/08 16:35:04 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/17 19:10:37 by lud-adam         ###   ########.fr       */
+/*   Created: 2025/02/18 19:40:47 by lud-adam          #+#    #+#             */
+/*   Updated: 2025/02/18 20:32:13 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fractol.h"
+#include "../../include/fractol.h"
 
-int main(void)
+void	map_to_complex(int x, int y, double *re, double *im, t_mlx *win)
 {
-    t_mlx window;
-
-    init_screen_mlx(&window);
-    if (!window.mlx || !window.mlx_win)
-	    return 1;
-    mandelbrot(&window);
-    mlx_hook(window.mlx_win, 4, 5, mouse_hook, &window);
-    mlx_hook(window.mlx_win, 2, 1L << 0, key_press, &window);
-    mlx_hook(window.mlx_win, 17, 0, close_win, &window);
-    mlx_loop(window.mlx);
-    return (0);
+	*re = MIN_RE + ((double)x / (double)MAX_WIDTH) * (MAX_RE - MIN_RE) + win->scale;
+	*im = MAX_IM - ((double)y / (double)MAX_HEIGHT) * (MAX_IM - MIN_IM) + win->scale;
 }

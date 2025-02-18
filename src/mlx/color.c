@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/08 16:35:04 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/17 19:10:37 by lud-adam         ###   ########.fr       */
+/*   Created: 2025/02/18 19:50:41 by lud-adam          #+#    #+#             */
+/*   Updated: 2025/02/18 19:50:57 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-int main(void)
+int	get_color(int i)
 {
-    t_mlx window;
+	int	r;
+	int	g;
+	int	b;
 
-    init_screen_mlx(&window);
-    if (!window.mlx || !window.mlx_win)
-	    return 1;
-    mandelbrot(&window);
-    mlx_hook(window.mlx_win, 4, 5, mouse_hook, &window);
-    mlx_hook(window.mlx_win, 2, 1L << 0, key_press, &window);
-    mlx_hook(window.mlx_win, 17, 0, close_win, &window);
-    mlx_loop(window.mlx);
-    return (0);
+	if (i == MAX_ITER)
+		return (0x000000);
+	r = (i * 9) % 256;
+	g = (i * 2) % 256;
+	b = (i * 4) % 256;
+	return ((r << 16) | (g << 8) | b);
 }
