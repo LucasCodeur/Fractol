@@ -18,8 +18,7 @@ LIBFT_DIR := libft/
 DEP_DIR := dep
 INC_DIR := include
 
-HEADERS := $(INC_DIR)/fractol.h
-SRC = $(shell find $(SRC_DIR) -name "*.c")
+SRC := $(shell find $(SRC_DIR) -name "*.c")
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEP := $(OBJ:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 
@@ -30,21 +29,15 @@ INC := -I$(INC_DIR) -I/usr/include -Imlx_linux
 LIBS := -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
 LIBFT := $(LIBFT_DIR)libft.a
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) 
 	$(CC) $(CFLAGS) $(INC) $^ $(LIBS) -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(DEP_DIR)
-	@mkdir -p $(dir $@)  # Creates the necessary directories for obj
-	@mkdir -p $(dir $(DEP_DIR)/$*.d)  # Creates the necessary directories for dep
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
-	$(CC) -MM $(CFLAGS) $(INC) $< -MF $(DEP_DIR)/$*.d
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/fractol.h
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -c $< -o $@
 
-
-$(LIBFT): FORCE
+$(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
-
-$(OBJ_DIR) $(DEP_DIR):
-	@mkdir -p $@
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
@@ -56,8 +49,7 @@ fclean: clean
 
 re: fclean $(NAME)
 
-FORCE: 
-
 -include $(DEP)
 
 .PHONY: all clean fclean re
+

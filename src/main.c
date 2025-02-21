@@ -19,10 +19,11 @@ int main(void)
     init_screen_mlx(&window);
     if (!window.mlx || !window.mlx_win)
 	    return 1;
-    mandelbrot(&window);
-    mlx_hook(window.mlx_win, 4, 5, mouse_hook, &window);
+    // mandelbrot(&window);
+    julia(&window);
     mlx_hook(window.mlx_win, 2, 1L << 0, key_press, &window);
     mlx_hook(window.mlx_win, 17, 0, close_win, &window);
+    // mlx_hook(window.mlx_win, 4, 5, mouse_hook, &window);
     mlx_loop(window.mlx);
     return (0);
 }

@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:46:22 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/18 20:40:40 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:14:57 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
+
+void	map_to_complex(int x, int y, double *re, double *im)
+{
+	*re = MIN_RE_M + ((double)x / (double)MAX_WIDTH) * (MAX_RE_M - MIN_RE_M);
+	*im = MAX_IM_M - ((double)y / (double)MAX_HEIGHT) * (MAX_IM_M - MIN_IM_M);
+}
+
 
 static void	mandelbrot_formula(t_cn c, size_t *i)
 {
@@ -41,7 +48,7 @@ void	mandelbrot(t_mlx *win)
 		coord.x = 0;
 		while (coord.x < MAX_WIDTH)
 		{
-			map_to_complex(coord.x, coord.y, &c.r, &c.i, win);
+			map_to_complex(coord.x, coord.y, &c.r, &c.i);
 			i = 0;
 			mandelbrot_formula(c, &i);
 			if (i == MAX_ITER)

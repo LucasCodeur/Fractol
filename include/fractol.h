@@ -16,10 +16,16 @@
 # define MAX_WIDTH 1920
 # define MAX_HEIGHT 1920
 # define MAX_ITER 50
-# define MIN_RE -2.0
-# define MAX_RE 1.0
-# define MIN_IM -1.5
-# define MAX_IM 1.5
+# define MIN_RE_J -2.0
+# define MAX_RE_J 2.0
+# define MIN_IM_J -2.0
+# define MAX_IM_J 2.0
+
+# define MIN_RE_M -2.0
+# define MAX_RE_M 1.0
+# define MIN_IM_M -1.5
+# define MAX_IM_M 1.5
+
 # define BLACK 0x000000
 # define MAX_SCALE 1000.0f
 # define MIN_SCALE 0.0001f
@@ -82,7 +88,7 @@ int		mouse_hook(int button, t_mlx *win);
 int		get_color(int i);
 
 // MATHS
-void	map_to_complex(int x, int y, double *re, double *im, t_mlx *win);
 void	mandelbrot(t_mlx *window);
+void	julia(t_mlx *win);
 
 #endif
