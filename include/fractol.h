@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/24 17:39:23 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:12:11 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define ZOOM_IN(scale) ((scale) *= 1.1)
 # define ZOOM_OUT(scale) ((scale) /= 1.1)
 
-#include "../libft/libft.h"
+#include "../src/libft/libft.h"
 #include <../mlx_linux/mlx.h>
 #include <math.h>
 #include <stdlib.h>
@@ -83,6 +83,8 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 int		key_press(int keycode, void *param);
 int		close_win(void *param);
 int		mouse_hook(int button, int x, int y, void *param);
+void	ft_hook(t_mlx window);
+
 
 // COLOR
 

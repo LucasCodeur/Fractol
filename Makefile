@@ -6,15 +6,15 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 16:42:49 by lud-adam          #+#    #+#              #
-#    Updated: 2025/02/24 15:37:49 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/02/24 18:23:56 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := fractol
 SRC_DIR := src
-FTPRINTF_DIR := ft_printf
+FTPRINTF_DIR := src/libft/ft_printf
 OBJ_DIR := obj
-LIBFT_DIR := libft/
+LIBFT_DIR := src/libft/
 DEP_DIR := dep
 INC_DIR := include
 
@@ -22,9 +22,9 @@ SRC := $(shell find $(SRC_DIR) -name "*.c")
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEP := $(OBJ:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 
-MAKE := make -j --no-print-directory
+MAKE := make -j
 CC := cc
-CFLAGS := -Wall -Wextra -g3 -Ofast
+CFLAGS := -Wall -Wextra -Werror -g3 -Ofast
 INC := -I$(INC_DIR) -I/usr/include -Imlx_linux
 LIBS := -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
 LIBFT := $(LIBFT_DIR)libft.a
