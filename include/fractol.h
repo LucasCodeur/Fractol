@@ -6,15 +6,15 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/17 19:10:12 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:55:45 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H 
 # define FRACTOL_H
 # define SCALE 270
-# define MAX_WIDTH 1920
-# define MAX_HEIGHT 1920
+# define MAX_WIDTH 500
+# define MAX_HEIGHT 500
 # define MAX_ITER 50
 # define MIN_RE_J -2.0
 # define MAX_RE_J 2.0
@@ -27,8 +27,8 @@
 # define MAX_IM_M 1.5
 
 # define BLACK 0x000000
-# define MAX_SCALE 1000.0f
-# define MIN_SCALE 0.0001f
+# define MAX_SCALE 1000.0
+# define MIN_SCALE 0.0001
 # define ZOOM_IN(scale) ((scale) *= 1.1)
 # define ZOOM_OUT(scale) ((scale) /= 1.1)
 
@@ -81,14 +81,17 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 //HOOKS
 int		key_press(int keycode, void *param);
 int		close_win(void *param);
-int		mouse_hook(int button, t_mlx *win);
+int		mouse_hook(int button, int x, int y, void *param);
 
-// COLORD
+// COLOR
 
 int		get_color(int i);
 
 // MATHS
 void	mandelbrot(t_mlx *window);
-void	julia(t_mlx *win);
+void	julia(t_mlx *win, t_cn c);
+
+// UTILS
+double ft_convert_one_double(char *str);
 
 #endif

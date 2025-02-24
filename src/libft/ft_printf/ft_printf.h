@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 19:55:27 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/18 20:37:49 by lud-adam         ###   ########.fr       */
+/*   Created: 2024/12/20 11:08:57 by lud-adam          #+#    #+#             */
+/*   Updated: 2024/12/20 11:50:09 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fractol.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	key_press(int keycode, void *param)
-{
-	if (!param)
-		return (0);
-	t_mlx *mlx = (t_mlx *)param;
-	if (keycode == 65307)
-	{
-		free_img(mlx);
-		exit(0);
-	}
-	return (0);
-}
+# include <stdarg.h>
+# include <unistd.h>
 
-int	close_win(void *param)
-{
-	if (!param)
-		return (0);
-	t_mlx *win = (t_mlx *)param;
-	free_img(win);
-	exit(0);
-}
+int	print_hex(void *p, char *base, long size_base);
+int	print_char(char c);
+int	print_str(char *str);
+int	print_nbr(long nb, char *base, long size_base);
+int	ft_printf(const char *format, ...);
+
+#endif

@@ -26,16 +26,13 @@ static void julia_formula(t_cn c, size_t *i, t_cn z)
     }
 }
 
-void	julia(t_mlx *win)
+void	julia(t_mlx *win, t_cn c)
 {
 	t_coord coord;
-	t_cn	c;
 	t_cn	z;
 	size_t	i;
 
 	coord.y = 0;
-	c.r = -0.7;
-	c.i = 0.27015;
 	while (coord.y < MAX_HEIGHT)
 	{
 		coord.x = 0;
