@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/24 14:55:45 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:39:23 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <float.h>
 
 
 //TODO to take of 
@@ -92,6 +93,9 @@ void	mandelbrot(t_mlx *window);
 void	julia(t_mlx *win, t_cn c);
 
 // UTILS
-double ft_convert_one_double(char *str);
+void	ft_atod(t_cn *c, char *str, t_bool *error);
+
+// Errors
+void	error_message(void);
 
 #endif

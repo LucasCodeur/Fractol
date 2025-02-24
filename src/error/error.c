@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lud-adam <lud-adam <marvin@42.fr> >        +#+  +:+       +#+        */
+/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 08:54:45 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/24 17:45:45 by lud-adam         ###   ########.fr       */
+/*   Created: 2025/02/24 17:52:29 by lud-adam          #+#    #+#             */
+/*   Updated: 2025/02/24 17:52:41 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "fractol.h"
 
-size_t	ft_strlen(const char *str)
+void	error_message(void)
 {
-	size_t	i;
-
-	i = 0;
-	while (str && str[i])
-		i++;
-	return (i);
+    ft_putstr_fd("[Mandelbrot]\n", 2);
+    ft_putstr_fd("[Julia] double double\n", 2);
 }

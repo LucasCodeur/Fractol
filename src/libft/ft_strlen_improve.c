@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strlen_improve.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lud-adam <lud-adam <marvin@42.fr> >        +#+  +:+       +#+        */
+/*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 08:54:45 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/24 17:45:45 by lud-adam         ###   ########.fr       */
+/*   Created: 2025/02/24 17:43:00 by lud-adam          #+#    #+#             */
+/*   Updated: 2025/02/24 17:57:41 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen_improve(const char *str, char c)
 {
 	size_t	i;
 
 	i = 0;
-	while (str && str[i])
+	while (str && str[i] != c)
 		i++;
 	return (i);
 }

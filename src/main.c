@@ -6,37 +6,47 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:35:04 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/24 14:55:53 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:00:14 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fractol.h"
 
-// int main(void)
-// {
-//     t_mlx window;
-//
-//     init_screen_mlx(&window);
-//     if (!window.mlx || !window.mlx_win)
-//     {
-// 	    free_img(&window);
-// 	    return 1;
-//     }
-//     mandelbrot(&window);
-//     // julia(&window);
-//     mlx_hook(window.mlx_win, 2, 1L<<0, key_press, &window);
-//     mlx_hook(window.mlx_win, 17, 0, close_win, &window);
-//     mlx_hook(window.mlx_win, 4, 1L<<2, mouse_hook, &window);
-//     mlx_loop(window.mlx);
-//     free_img(&window);
-//     return (0);
-// }
+void	ft_render(char *str, t_mlx *win)
+{
+    t_cn    c;
+    t_bool  error;
+    
+    c.r = 0.0;
+    c.i = 0.0;
+    error = FALSE;
+    if (ft_strncmp(str, "Mandelbrot", ft_strlen_improve(str, "\0")) == 1)
+	mandelbrot(win);
+    else if (ft_strncmp(str, "Julia", ft_strlen_improve(str, " ")) == 1)
+    {
+	ft_atod(&c, &str[ft_strlen_improve(str, " ") + 1], &error);
+	if (error = TRUE)
+	{
+	    free_img(win);
+	    error_message;
+	    exit(EXIT_FAILURE);
+	}
+	julia(win, c);
+    }
+ }
 
 int main(int argc, char **argv)
 {
-    double  test;
-
-    test = ft_convert_one_double(argv[1]);
-    printf("%f", test);
+    t_mlx   window;
+    int	    i;
+    
+    i = 1;
+    init_screen_mlx(&window);
+    if (!window.mlx || !window.mlx_win)
+    {
+	    free_img(&window);
+	    return (1);
+    }
+    ft_render(argv[i], &window);
     return (0);
 }

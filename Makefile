@@ -6,7 +6,7 @@
 #    By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 16:42:49 by lud-adam          #+#    #+#              #
-#    Updated: 2025/02/04 15:31:18 by lud-adam         ###   ########.fr        #
+#    Updated: 2025/02/24 15:37:49 by lud-adam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ DEP := $(OBJ:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 
 MAKE := make -j --no-print-directory
 CC := cc
-CFLAGS := -Wall -Wextra -g3 -O3
+CFLAGS := -Wall -Wextra -g3 -Ofast
 INC := -I$(INC_DIR) -I/usr/include -Imlx_linux
 LIBS := -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
 LIBFT := $(LIBFT_DIR)libft.a

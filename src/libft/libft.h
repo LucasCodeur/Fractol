@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam <marvin@42.fr> >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:55:59 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/12 14:39:01 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:45:09 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_bool	ft_is_plus_or_minus(int c);
 
 // 2. String Manipulation Functions
 size_t	ft_strlen(const char *str);
+size_t	ft_strlen_improve(const char *str, char c);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_strchr(const char *s, int c);
