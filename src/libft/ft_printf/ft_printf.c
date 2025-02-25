@@ -14,7 +14,7 @@
 
 static int	print_format(char format, va_list args)
 {
-	int		count;
+	int	count;
 
 	count = 0;
 	if (format == 'c')

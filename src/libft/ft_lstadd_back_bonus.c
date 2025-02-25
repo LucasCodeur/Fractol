@@ -22,5 +22,5 @@ void	ft_lstadd_back(t_list **lst, t_list *new_node)
 		return ;
 	}
 	pt = ft_lstlast(*lst);
-	pt -> next = new_node;
+	pt->next = new_node;
 }

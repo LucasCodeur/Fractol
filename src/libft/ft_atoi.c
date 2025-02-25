@@ -14,8 +14,8 @@
 
 t_bool	ft_isspace(int c)
 {
-	if (c == ' ' || c == '\t' || c == '\n'
-		|| c == '\v' || c == '\f' || c == '\r')
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r')
 		return (TRUE);
 	return (FALSE);
 }

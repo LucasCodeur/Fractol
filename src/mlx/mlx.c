@@ -16,10 +16,10 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x >= MAX_WIDTH  || y < 0 || y >= MAX_HEIGHT)
+	if (x < 0 || x >= MAX_WIDTH || y < 0 || y >= MAX_HEIGHT)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 void	free_img(t_mlx *mlx)
@@ -31,6 +31,8 @@ void	free_img(t_mlx *mlx)
 		mlx_destroy_image(mlx->mlx, mlx->img.img);
 		mlx->img.img = NULL;
 	}
+	if (mlx->img.addr)
+		mlx->img.addr = NULL;
 	if (mlx->mlx_win)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
@@ -39,6 +41,7 @@ void	free_img(t_mlx *mlx)
 	if (mlx->mlx)
 	{
 		mlx_destroy_display(mlx->mlx);
+		free(mlx->mlx);
 		mlx->mlx = NULL;
 	}
 }
@@ -47,29 +50,23 @@ void	init_screen_mlx(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
-	{
-		ft_printf("Error : mlx_init failed\n");
 		return ;
-	}
 	mlx->mlx_win = mlx_new_window(mlx->mlx, MAX_WIDTH, MAX_HEIGHT, "Fractol");
 	if (!mlx->mlx_win)
 	{
-		ft_printf("Error: mlx_new_window failed\n");
 		free_img(mlx);
 		return ;
 	}
 	mlx->img.img = mlx_new_image(mlx->mlx, MAX_WIDTH, MAX_HEIGHT);
 	if (!mlx->img.img)
 	{
-	        ft_printf("Error: mlx_new_image failed\n");
 		free_img(mlx);
 		return ;
 	}
-	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel, &mlx->img.line_length,
-									 &mlx->img.endian);
+	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel,
+			&mlx->img.line_length, &mlx->img.endian);
 	if (!mlx->img.addr)
 	{
-	        ft_printf("Error: mlx_get_data_addr failed\n");
 		free_img(mlx);
 		return ;
 	}

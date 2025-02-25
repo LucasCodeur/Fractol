@@ -14,6 +14,6 @@
 
 void	error_message(void)
 {
-    ft_putstr_fd("[Mandelbrot]\n", 2);
-    ft_putstr_fd("[Julia] double double\n", 2);
+	ft_putstr_fd("[Mandelbrot]\n", 2);
+	ft_putstr_fd("[Julia] double double\n", 2);
 }

@@ -37,7 +37,7 @@ int	print_char(char c)
 
 int	print_str(char *str)
 {
-	int		count;
+	int	count;
 
 	count = 0;
 	if (!str)
@@ -69,7 +69,7 @@ int	print_nbr(long nb, char *base, long size)
 
 int	print_hex(void *p, char *base, long size)
 {
-	int		count;
+	int	count;
 
 	count = 0;
 	if (!p)

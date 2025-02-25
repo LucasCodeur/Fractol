@@ -58,15 +58,6 @@ typedef struct	s_cn
 	double	i;
 }				t_cn;
 
-typedef	struct s_mlx
-{
-	t_cn	c;
-	void	*mlx;
-	void	*mlx_win;
-	t_img	img;
-	double	scale;
-}				t_mlx;
-
 typedef struct s_coord
 {
 	int		x;
@@ -74,15 +65,24 @@ typedef struct s_coord
 
 }	t_coord;
 
+typedef	struct s_mlx
+{
+	t_cn	c;
+	t_coord	coord;
+	void	*mlx;
+	void	*mlx_win;
+	t_img	img;
+	double	scale;
+}				t_mlx;
 
 typedef struct	s_decimal_nb
 {
-	int		i;
+	int			i;
 	double		int_part;
 	double		dec_part;
 	double		sign;
 	long double	result;
-	int		of_decs;
+	int			of_decs;
 	t_bool		dot_encounter;
 }				t_decimal_nb;
 //MLX
@@ -92,20 +92,20 @@ void		free_img(t_mlx *t_mlx);
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 //HOOKS
-int		key_press(int keycode, void *param);
-int		close_win(void *param);
+int			key_press(int keycode, void *param);
+int			close_win(void *param);
 void		hook_julia(t_mlx window);
 void		hook_mandelbrot(t_mlx window);
 
 // COLOR
-int		get_color(int i);
+int			get_color(int i);
 
 // MATHS
 void		mandelbrot(t_mlx *window);
 void		julia(t_mlx *win);
 
 //Fractal choice
-void		fractal_choice(char **str, t_mlx *win);
+void		fractal_choice(int argc, char **str, t_mlx *win);
 
 // UTILS
 long double ft_atod(char *str);
