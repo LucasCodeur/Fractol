@@ -19,7 +19,10 @@ int main(int argc, char **argv)
     
     i = 1;
     if (argc < 2)
+    {
+	error_message();
 	return (1);
+    }
     init_screen_mlx(&window);
     if (!window.mlx || !window.mlx_win)
     {

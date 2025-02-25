@@ -24,7 +24,7 @@ DEP := $(OBJ:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 
 MAKE := make -j
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g3 -Ofast
+CFLAGS := -Wall -Wextra -Werror -g3 
 INC := -I$(INC_DIR) -I/usr/include -Imlx_linux
 LIBS := -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
 LIBFT := $(LIBFT_DIR)libft.a

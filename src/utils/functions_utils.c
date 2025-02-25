@@ -12,47 +12,43 @@
 
 #include "../../include/fractol.h"
 
-int	compute_double(char *str, double *int_part, double *deci_part, t_bool *dot_encount, int *i)
+void	compute_double(char *str, t_decimal_nb *nb, t_bool *dot_encount, int *i)
 {
-    int	nb_of_decimal;
-
-    nb_of_decimal = 0;
     if (*dot_encount == FALSE)
-        *int_part = *int_part * 10 + (str[*i] - 48);
+        nb->int_part = nb->int_part * 10 + (str[*i] - 48);
     else
     {
-        *deci_part = *deci_part * 10 + (str[*i] - 48);
-        nb_of_decimal++;
+        nb->dec_part = nb->dec_part * 10 + (str[*i] - 48);
+        nb->of_decs++;
     }
     (*i)++;
-    return (nb_of_decimal);
 }
 
 long double ft_atod(char *str)
 {
-    double  int_part;
-    double  dec_part;
-    int	    nb_of_dec;
-    t_bool  dot_encounter;
-    int	    i;
+    t_decimal_nb    nb;
 
-    dot_encounter = FALSE;
-    int_part = 0.0;
-    dec_part = 0.0;
-    nb_of_dec = 0.0;
-    i = 0;
-    if (ft_is_plus_or_minus(str[i]) == TRUE)
+    nb.dot_encounter = FALSE;
+    nb.int_part = 0.0;
+    nb.dec_part = 0.0;
+    nb.of_decs = 0;
+    nb.sign = 1.0;
+    nb.i = 0;
+    if (ft_is_plus_or_minus(str[nb.i]) == TRUE)
     {
-	if str[]
+	if (str[nb.i] == '-')
+	    nb.sign = -1.0;
+	nb.i++;
     }
-    while (str[i] != '\0')
+    while (str[nb.i] != '\0')
     {
-	if (str[i] == '.')
+	if (str[nb.i] == '.')
 	{
-	    dot_encounter = TRUE;
-	    i++;
+	    nb.dot_encounter = TRUE;
+	    nb.i++;
 	}
-	nb_of_dec = compute_double(str, &int_part, &dec_part, &dot_encounter, &i);
+	compute_double(str, &nb, &nb.dot_encounter, &nb.i);
     }
-    return (integer_part + fractional_part / pow(10, nb_of_dec)); 
+    nb.result = (nb.int_part + nb.dec_part / pow(10, nb.of_decs)) * nb.sign;
+    return (nb.result); 
 }

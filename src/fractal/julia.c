@@ -26,7 +26,7 @@ static void julia_formula(t_cn c, size_t *i, t_cn z)
     }
 }
 
-void	julia(t_mlx *win, t_cn c)
+void	julia(t_mlx *win)
 {
 	t_coord coord;
 	t_cn	z;
@@ -39,9 +39,9 @@ void	julia(t_mlx *win, t_cn c)
 		while (coord.x < MAX_WIDTH)
 		{
 			i = 0;
-			z.r = MIN_RE_J + coord.x * (MAX_RE_J - MIN_RE_J) / (MAX_WIDTH - 1);
-			z.i = MAX_IM_J - coord.y * (MAX_IM_J - MIN_IM_J) / (MAX_HEIGHT - 1);
-			julia_formula(c, &i, z);
+			z.r = (MIN_RE_J + coord.x * (MAX_RE_J - MIN_RE_J) / (MAX_WIDTH - 1)) * win->scale;
+			z.i = (MAX_IM_J - coord.y * (MAX_IM_J - MIN_IM_J) / (MAX_HEIGHT - 1)) * win->scale;
+			julia_formula(win->c, &i, z);
 			if (i == MAX_ITER)
 				my_mlx_pixel_put(&win->img, coord.x, coord.y, BLACK);
 			else
