@@ -29,21 +29,14 @@
 # define BLACK 0x000000
 # define MAX_SCALE 1000.0
 # define MIN_SCALE 0.0001
-# define ZOOM_IN(scale) ((scale) *= 1.1)
-# define ZOOM_OUT(scale) ((scale) /= 1.1)
 
-#include "../src/libft/libft.h"
-#include <../mlx_linux/mlx.h>
-#include <math.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <float.h>
+# include "../src/libft/libft.h"
+# include <../mlx_linux/mlx.h>
+# include <math.h>
+# include <stdlib.h>
+# include <sys/types.h>
 
-
-//TODO to take of 
-#include <stdio.h>
-
-typedef struct s_img 
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
@@ -52,7 +45,7 @@ typedef struct s_img
 	int		endian;
 }					t_img;
 
-typedef struct	s_cn
+typedef struct s_cn
 {
 	double	r;
 	double	i;
@@ -65,7 +58,7 @@ typedef struct s_coord
 
 }	t_coord;
 
-typedef	struct s_mlx
+typedef struct s_mlx
 {
 	t_cn	c;
 	t_coord	coord;
@@ -75,7 +68,7 @@ typedef	struct s_mlx
 	double	scale;
 }				t_mlx;
 
-typedef struct	s_decimal_nb
+typedef struct s_decimal_nb
 {
 	int			i;
 	double		int_part;
@@ -108,7 +101,7 @@ void		julia(t_mlx *win);
 void		fractal_choice(int argc, char **str, t_mlx *win);
 
 // UTILS
-long double ft_atod(char *str);
+long double	ft_atod(char *str);
 
 // Errors
 void		error_message(void);

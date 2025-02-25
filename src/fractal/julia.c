@@ -25,9 +25,9 @@ static int	mouse_hook_julia(int button, int x, int y, void *param)
 		return (1);
 	}
 	if (button == 4 && win->scale < MAX_SCALE)
-		ZOOM_OUT(win->scale);
+		win->scale /= 1.1;
 	if (button == 5 && win->scale > MIN_SCALE)
-		ZOOM_IN(win->scale);
+		win->scale *= 1.1;
 	julia(win);
 	return (0);
 }
