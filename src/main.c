@@ -12,33 +12,6 @@
 
 #include "../include/fractol.h"
 
-void	ft_render(char *str, t_mlx *win)
-{
-    t_cn    c;
-    t_bool  error;
-    
-    c.r = 0.0;
-    c.i = 0.0;
-    error = FALSE;
-    if (ft_strncmp(str, "Mandelbrot", ft_strlen_improve("Mandelbrot", '\0')) == 1)
-    {
-	mandelbrot(win);
-	ft_hook(*win);
-    }
-    else if (ft_strncmp(str, "Julia", ft_strlen_improve("Julia", ' ')) == 1)
-    {
-	ft_atod(&c, &str[ft_strlen_improve("Julia", '\0') + 1], &error);
-	if (error == TRUE)
-	{
-	    free_img(win);
-	    error_message();
-	    exit(EXIT_FAILURE);
-	}
-	julia(win, c);
-	ft_hook(*win);
-    }
- }
-
 int main(int argc, char **argv)
 {
     t_mlx   window;
@@ -53,6 +26,6 @@ int main(int argc, char **argv)
 	    free_img(&window);
 	    return (1);
     }
-    ft_render(argv[i], &window);
+    fractal_choice(argv, &window);
     return (0);
 }

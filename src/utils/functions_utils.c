@@ -12,54 +12,47 @@
 
 #include "../../include/fractol.h"
 
-static long double str_to_double(char *str, int *i)
+int	compute_double(char *str, double *int_part, double *deci_part, t_bool *dot_encount, int *i)
 {
-    double  integer_part;
-    double  fractional_part;
-    int	    number_of_decimal;
+    int	nb_of_decimal;
+
+    nb_of_decimal = 0;
+    if (*dot_encount == FALSE)
+        *int_part = *int_part * 10 + (str[*i] - 48);
+    else
+    {
+        *deci_part = *deci_part * 10 + (str[*i] - 48);
+        nb_of_decimal++;
+    }
+    (*i)++;
+    return (nb_of_decimal);
+}
+
+long double ft_atod(char *str)
+{
+    double  int_part;
+    double  dec_part;
+    int	    nb_of_dec;
     t_bool  dot_encounter;
+    int	    i;
 
     dot_encounter = FALSE;
-    integer_part = 0.0;
-    fractional_part = 0.0;
-    number_of_decimal = 0.0;
-    while (str[*i] != '\0' && str[*i] != ' ')
+    int_part = 0.0;
+    dec_part = 0.0;
+    nb_of_dec = 0.0;
+    i = 0;
+    if (ft_is_plus_or_minus(str[i]) == TRUE)
     {
-	if (str[*i] == '.')
+	if str[]
+    }
+    while (str[i] != '\0')
+    {
+	if (str[i] == '.')
 	{
 	    dot_encounter = TRUE;
-	    (*i)++;
+	    i++;
 	}
-	if (dot_encounter == FALSE)
-	    integer_part = integer_part * 10 + (str[*i] - 48);
-	else
-	{
-	    fractional_part = fractional_part * 10 + (str[*i] - 48);
-	    number_of_decimal++;
-	}
-	(*i)++;
+	nb_of_dec = compute_double(str, &int_part, &dec_part, &dot_encounter, &i);
     }
-    return (integer_part + fractional_part / pow(10, number_of_decimal)); 
+    return (integer_part + fractional_part / pow(10, nb_of_dec)); 
 }
-
-void	ft_atod(t_cn *c, char *str, t_bool *error)
-{
-    int		i;
-    long double	check_overflow;
-    long double	check_overflow_2;
-
-    i = 0;
-    check_overflow = str_to_double(str, &i); 
-    i++;
-    check_overflow_2 = str_to_double(str, &i); 
-    if (check_overflow > DBL_MAX || check_overflow_2 > DBL_MAX)
-    {
-	*error = TRUE;
-	return ;
-    }
-    c->r = check_overflow;
-    c->i = check_overflow_2;
-    return ;
-}
-
-
