@@ -18,7 +18,18 @@ LIBFT_DIR := src/libft/
 DEP_DIR := dep
 INC_DIR := include
 
-SRC := $(shell find $(SRC_DIR) -name "*.c")
+SRC := \
+	src/error/error.c \
+    src/fractal/fractal_choice.c \
+    src/fractal/julia.c \
+    src/fractal/mandelbrot.c \
+    src/libft/compute_size_long.c \
+    src/main.c \
+    src/mlx/color.c \
+    src/mlx/hooks.c \
+    src/mlx/mlx.c \
+    src/utils/functions_utils.c \
+
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEP := $(OBJ:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 
