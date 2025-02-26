@@ -14,31 +14,31 @@
 
 static int	mouse_hook_julia(int button, int x, int y, void *param)
 {
-	t_mlx	*win;
+	t_mlx	*data;
 
-	win = (t_mlx *)param;
+	data = (t_mlx *)param;
 	(void)x;
 	(void)y;
-	if (!win)
+	if (!data)
 	{
-		free_img(win);
+		free_img(data);
 		return (1);
 	}
-	if (button == 4 && win->scale < MAX_SCALE)
-		win->scale /= 1.1;
-	if (button == 5 && win->scale > MIN_SCALE)
-		win->scale *= 1.1;
-	julia(win);
+	if (button == 4 && data->scale < MAX_SCALE)
+		data->scale /= 1.1;
+	if (button == 5 && data->scale > MIN_SCALE)
+		data->scale *= 1.1;
+	julia(data);
 	return (0);
 }
 
-void	hook_julia(t_mlx window)
+void	hook_julia(t_mlx data)
 {
-	mlx_hook(window.mlx_win, 2, 1L << 0, key_press, &window);
-	mlx_hook(window.mlx_win, 17, 0, close_win, &window);
-	mlx_hook(window.mlx_win, 4, 1L << 2, mouse_hook_julia, &window);
-	mlx_loop(window.mlx);
-	free_img(&window);
+	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
+	mlx_hook(data.mlx_win, 17, 0, close_win, &data);
+	mlx_hook(data.mlx_win, 4, 1L << 2, mouse_hook_julia, &data);
+	mlx_loop(data.mlx);
+	free_img(&data);
 }
 
 static void	julia_formula(t_cn c, size_t *i, t_cn z)
@@ -55,31 +55,31 @@ static void	julia_formula(t_cn c, size_t *i, t_cn z)
 	}
 }
 
-void	julia(t_mlx *win)
+void	julia(t_mlx *data)
 {
-	t_coord	coord;
-	t_cn	z;
 	size_t	i;
 
-	coord.y = 0;
-	while (coord.y < MAX_HEIGHT)
+	data->coord.y = 0;
+	while (data->coord.y < MAX_HEIGHT)
 	{
-		coord.x = 0;
-		while (coord.x < MAX_WIDTH)
+		data->coord.x = 0;
+		while (data->coord.x < MAX_WIDTH)
 		{
 			i = 0;
-			z.r = (MIN_RE_J + coord.x * (MAX_RE_J - MIN_RE_J) / (MAX_WIDTH - 1))
-				* win->scale;
-			z.i = (MAX_IM_J - coord.y * (MAX_IM_J - MIN_IM_J) / (MAX_HEIGHT
-						- 1)) * win->scale;
-			julia_formula(win->c, &i, z);
+			data->z.r = (MIN_RE_J + data->coord.x * (MAX_RE_J - MIN_RE_J)
+					/ (MAX_WIDTH - 1)) * data->scale;
+			data->z.i = (MAX_IM_J - data->coord.y * (MAX_IM_J - MIN_IM_J)
+					/ (MAX_HEIGHT - 1)) * data->scale;
+			julia_formula(data->c, &i, data->z);
 			if (i == MAX_ITER)
-				my_mlx_pixel_put(&win->img, coord.x, coord.y, BLACK);
+				my_mlx_pixel_put(&data->img, data->coord.x, data->coord.y,
+					BLACK);
 			else
-				my_mlx_pixel_put(&win->img, coord.x, coord.y, get_color(i));
-			coord.x++;
+				my_mlx_pixel_put(&data->img, data->coord.x, data->coord.y,
+					get_color(i));
+			data->coord.x++;
 		}
-		coord.y++;
+		data->coord.y++;
 	}
-	mlx_put_image_to_window(win->mlx, win->mlx_win, win->img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
 }

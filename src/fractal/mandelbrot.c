@@ -14,41 +14,41 @@
 
 static int	mouse_hook_mandelbrot(int button, int x, int y, void *param)
 {
-	t_mlx	*win;
+	t_mlx	*data;
 
-	win = (t_mlx *)param;
+	data = (t_mlx *)param;
 	(void)x;
 	(void)y;
-	if (!win)
+	if (!data)
 	{
-		free_img(win);
+		free_img(data);
 		return (1);
 	}
-	if (button == 4 && win->scale < MAX_SCALE)
-		win->scale /= 1.1;
-	if (button == 5 && win->scale > MIN_SCALE)
-		win->scale *= 1.1;
-	mandelbrot(win);
+	if (button == 4 && data->scale < MAX_SCALE)
+		data->scale /= 1.1;
+	if (button == 5 && data->scale > MIN_SCALE)
+		data->scale *= 1.1;
+	mandelbrot(data);
 	return (0);
 }
 
-void	hook_mandelbrot(t_mlx window)
+void	hook_mandelbrot(t_mlx data)
 {
-	mlx_hook(window.mlx_win, 2, 1L << 0, key_press, &window);
-	mlx_hook(window.mlx_win, 17, 0, close_win, &window);
-	mlx_hook(window.mlx_win, 4, 1L << 2, mouse_hook_mandelbrot, &window);
-	mlx_loop(window.mlx);
-	free_img(&window);
+	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
+	mlx_hook(data.mlx_win, 17, 0, close_win, &data);
+	mlx_hook(data.mlx_win, 4, 1L << 2, mouse_hook_mandelbrot, &data);
+	mlx_loop(data.mlx);
+	free_img(&data);
 }
 
-static void	map_to_complex(t_mlx *win, double *re, double *im)
+static void	map_to_complex(t_mlx *data, double *re, double *im)
 {
-	*re = MIN_RE_M + ((double)win->coord.x / (double)MAX_WIDTH) * (MAX_RE_M
+	*re = MIN_RE_M + ((double)data->coord.x / (double)MAX_WIDTH) * (MAX_RE_M
 			- MIN_RE_M);
-	*im = MAX_IM_M - ((double)win->coord.y / (double)MAX_HEIGHT) * (MAX_IM_M
+	*im = MAX_IM_M - ((double)data->coord.y / (double)MAX_HEIGHT) * (MAX_IM_M
 			- MIN_IM_M);
-	*re *= win->scale;
-	*im *= win->scale;
+	*re *= data->scale;
+	*im *= data->scale;
 }
 
 static void	mandelbrot_formula(t_cn c, size_t *i)
@@ -68,29 +68,28 @@ static void	mandelbrot_formula(t_cn c, size_t *i)
 	}
 }
 
-void	mandelbrot(t_mlx *win)
+void	mandelbrot(t_mlx *data)
 {
-	t_coord	coord;
-	t_cn	c;
 	size_t	i;
 
-	win->coord.y = 0;
-	while (coord.y < MAX_HEIGHT)
+	data->coord.y = 0;
+	while (data->coord.y < MAX_HEIGHT)
 	{
-		win->coord.x = 0;
-		while (win->coord.x < MAX_WIDTH)
+		data->coord.x = 0;
+		while (data->coord.x < MAX_WIDTH)
 		{
-			map_to_complex(win, &c.r, &c.i);
+			map_to_complex(data, &data->c.r, &data->c.i);
 			i = 0;
-			mandelbrot_formula(c, &i);
+			mandelbrot_formula(data->c, &i);
 			if (i == MAX_ITER)
-				my_mlx_pixel_put(&win->img, win->coord.x, win->coord.y, BLACK);
+				my_mlx_pixel_put(&data->img, data->coord.x, data->coord.y,
+					BLACK);
 			else
-				my_mlx_pixel_put(&win->img, win->coord.x, win->coord.y,
+				my_mlx_pixel_put(&data->img, data->coord.x, data->coord.y,
 					get_color(i));
-			win->coord.x++;
+			data->coord.x++;
 		}
-		win->coord.y++;
+		data->coord.y++;
 	}
-	mlx_put_image_to_window(win->mlx, win->mlx_win, win->img.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img, 0, 0);
 }

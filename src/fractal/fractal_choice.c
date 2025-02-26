@@ -14,16 +14,15 @@
 
 static void	get_julia_value(t_mlx *win, char **str)
 {
-	double		max_double;
-	double		min_double;
 	long double	check_double_overflow;
 	long double	check_double_overflow_2;
 
 	check_double_overflow = ft_atod(str[2]);
 	check_double_overflow_2 = ft_atod(str[3]);
-	max_double = (2.0 - (1.0 / (1LL << 52))) * pow(2.0, 1023);
-	min_double = pow(2.0, -1022);
-	if ((check_double_overflow > max_double || check_double_overflow_2 > max_double) || (check_double_overflow < min_double || check_double_overflow_2 < min_double))
+	if ((check_double_overflow > MAX_DOUBLE
+			|| check_double_overflow_2 > MAX_DOUBLE)
+		&& (check_double_overflow < MIN_DOUBLE
+			|| check_double_overflow_2 < MIN_DOUBLE))
 	{
 		free_img(win);
 		error_message();

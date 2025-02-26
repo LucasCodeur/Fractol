@@ -29,12 +29,13 @@
 # define BLACK 0x000000
 # define MAX_SCALE 1000.0
 # define MIN_SCALE 0.0001
+# define MAX_DOUBLE 1.797693e+308
+# define MIN_DOUBLE 2.225074e-308
 
 # include "../src/libft/libft.h"
 # include <../mlx_linux/mlx.h>
 # include <math.h>
 # include <stdlib.h>
-# include <sys/types.h>
 
 typedef struct s_img
 {
@@ -61,6 +62,7 @@ typedef struct s_coord
 typedef struct s_mlx
 {
 	t_cn	c;
+	t_cn	z;
 	t_coord	coord;
 	void	*mlx;
 	void	*mlx_win;
