@@ -60,16 +60,16 @@ void	julia(t_mlx *data)
 	size_t	i;
 
 	data->coord.y = 0;
-	while (data->coord.y < MAX_HEIGHT)
+	while (data->coord.y < HEIGHT)
 	{
 		data->coord.x = 0;
-		while (data->coord.x < MAX_WIDTH)
+		while (data->coord.x < WIDTH)
 		{
 			i = 0;
 			data->z.r = (MIN_RE_J + data->coord.x * (MAX_RE_J - MIN_RE_J)
-					/ (MAX_WIDTH - 1)) * data->scale;
+					/ (WIDTH - 1)) * data->scale;
 			data->z.i = (MAX_IM_J - data->coord.y * (MAX_IM_J - MIN_IM_J)
-					/ (MAX_HEIGHT - 1)) * data->scale;
+					/ (HEIGHT - 1)) * data->scale;
 			julia_formula(data->c, &i, data->z);
 			if (i == MAX_ITER)
 				my_mlx_pixel_put(&data->img, data->coord.x, data->coord.y,

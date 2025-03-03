@@ -43,9 +43,9 @@ void	hook_mandelbrot(t_mlx data)
 
 static void	map_to_complex(t_mlx *data, double *re, double *im)
 {
-	*re = MIN_RE_M + ((double)data->coord.x / (double)MAX_WIDTH) * (MAX_RE_M
+	*re = MIN_RE_M + ((double)data->coord.x / (double)WIDTH) * (MAX_RE_M
 			- MIN_RE_M);
-	*im = MAX_IM_M - ((double)data->coord.y / (double)MAX_HEIGHT) * (MAX_IM_M
+	*im = MAX_IM_M - ((double)data->coord.y / (double)HEIGHT) * (MAX_IM_M
 			- MIN_IM_M);
 	*re *= data->scale;
 	*im *= data->scale;
@@ -73,10 +73,10 @@ void	mandelbrot(t_mlx *data)
 	size_t	i;
 
 	data->coord.y = 0;
-	while (data->coord.y < MAX_HEIGHT)
+	while (data->coord.y < HEIGHT)
 	{
 		data->coord.x = 0;
-		while (data->coord.x < MAX_WIDTH)
+		while (data->coord.x < WIDTH)
 		{
 			map_to_complex(data, &data->c.r, &data->c.i);
 			i = 0;

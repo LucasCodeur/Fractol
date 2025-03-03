@@ -6,16 +6,17 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 15:02:15 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/02/24 18:12:11 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:59:35 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H 
 # define FRACTOL_H
 # define SCALE 270
-# define MAX_WIDTH 500
-# define MAX_HEIGHT 500
+# define WIDTH 500
+# define HEIGHT 500
 # define MAX_ITER 50
+
 # define MIN_RE_J -2.0
 # define MAX_RE_J 2.0
 # define MIN_IM_J -2.0
@@ -82,7 +83,7 @@ typedef struct s_decimal_nb
 }				t_decimal_nb;
 //MLX
 void		init_mlx(t_mlx *t_mlx);
-void		init_screen_mlx(t_mlx *t_mlx);
+void		init_screen_mlx(t_mlx *mlx);
 void		free_img(t_mlx *t_mlx);
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
