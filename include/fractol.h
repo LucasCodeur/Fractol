@@ -34,7 +34,7 @@
 # define MIN_DOUBLE 2.225074e-308
 
 # include "../src/libft/libft.h"
-# include <../mlx_linux/mlx.h>
+# include "../minilibx-linux/minilibx-linux/mlx.h"
 # include <math.h>
 # include <stdlib.h>
 

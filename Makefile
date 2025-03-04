@@ -15,6 +15,7 @@ SRC_DIR := src
 FTPRINTF_DIR := src/libft/ft_printf
 OBJ_DIR := obj
 LIBFT_DIR := src/libft/
+MLX_DIR := minilibx-linux/minilibx-linux/
 DEP_DIR := dep
 INC_DIR := include
 
@@ -36,13 +37,14 @@ DEP := $(OBJ:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 MAKE := make -j
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -Ofast
-INC := -I$(INC_DIR) -I/usr/include -Imlx_linux
-LIBS := -Lmlx_linux -lmlx -lXext -lX11 -lm -lz
+INC := -I$(INC_DIR) -I/usr/include -I$(MLX_DIR)
+LIBS := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 LIBFT := $(LIBFT_DIR)libft.a
+MLX := $(MLX_DIR)libmlx.a $(MLX_DIR)libmlx_Linux.a 
 
 all : $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) 
+$(NAME): $(OBJ) $(LIBFT) $(MLX) 
 	$(CC) $(CFLAGS) $(INC) $^ $(LIBS) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/fractol.h
@@ -52,8 +54,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/fractol.h
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
+
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 	rm -rf $(OBJ_DIR) $(DEP_DIR)
 
 fclean: clean
@@ -65,4 +71,3 @@ re: fclean $(NAME)
 -include $(DEP)
 
 .PHONY: all clean fclean re
-
