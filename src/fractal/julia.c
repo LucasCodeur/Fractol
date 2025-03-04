@@ -67,9 +67,9 @@ void	julia(t_mlx *data)
 		{
 			i = 0;
 			data->z.r = (MIN_RE_J + data->coord.x * (MAX_RE_J - MIN_RE_J)
-					/ (WIDTH - 1)) * data->scale;
+					/ ((double)WIDTH)) * data->scale;
 			data->z.i = (MAX_IM_J - data->coord.y * (MAX_IM_J - MIN_IM_J)
-					/ (HEIGHT - 1)) * data->scale;
+					/ ((double)HEIGHT)) * data->scale;
 			julia_formula(data->c, &i, data->z);
 			if (i == MAX_ITER)
 				my_mlx_pixel_put(&data->img, data->coord.x, data->coord.y,
