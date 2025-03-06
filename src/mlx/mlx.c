@@ -6,7 +6,7 @@
 /*   By: lud-adam <lud-adam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 16:01:10 by lud-adam          #+#    #+#             */
-/*   Updated: 2025/03/03 16:42:45 by lud-adam         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:42:10 by lud-adam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	init_screen_mlx(t_mlx *data)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return ;
+	mlx_get_screen_size(data->mlx, &data->max_width, &data->max_height);
 	data->mlx_win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Fractol");
-	if (!data->mlx_win)
+	if (!data->mlx_win || WIDTH > data->max_width || HEIGHT > data->max_height)
 	{
 		free_img(data);
 		return ;

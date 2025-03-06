@@ -52,3 +52,14 @@ long double	ft_atod(char *str)
 	nb.result = (nb.int_part + nb.dec_part / pow(10, nb.of_decs)) * nb.sign;
 	return (nb.result);
 }
+
+int ft_str_isdigit(char *str)
+{
+	int i = 0;
+	while(str[i])
+	{
+		if (ft_isdigit(str[i]) == FALSE)
+			return (0);
+	}
+	return (1);
+}

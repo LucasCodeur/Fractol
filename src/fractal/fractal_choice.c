@@ -17,14 +17,15 @@ static void	get_julia_value(t_mlx *data, char **str)
 	long double	check_double_overflow;
 	long double	check_double_overflow_2;
 
+	if (ft_str_isdigit(str[2]) == FALSE || ft_str_isdigit(str[3]) == FALSE)
+		exit(EXIT_FAILURE);
 	check_double_overflow = ft_atod(str[2]);
 	check_double_overflow_2 = ft_atod(str[3]);
 	if ((check_double_overflow > MAX_DOUBLE
 			|| check_double_overflow_2 > MAX_DOUBLE)
-		&& (check_double_overflow < MIN_DOUBLE
+		|| (check_double_overflow < MIN_DOUBLE
 			|| check_double_overflow_2 < MIN_DOUBLE))
 	{
-		free_img(data);
 		error_message();
 		exit(EXIT_FAILURE);
 	}
@@ -42,11 +43,13 @@ void	fractal_choice(int argc, char **str, t_mlx *data)
 	size_julia = ft_strlen("Julia");
 	if (ft_strncmp(str[1], "Mandelbrot", size_mandelbrot) == 0 && argc == 2)
 	{
+		init_screen_mlx(data);
 		mandelbrot(data);
 		hook_mandelbrot(*data);
 	}
 	else if (ft_strncmp(str[1], "Julia", size_julia) == 0 && argc == 4)
 	{
+		init_screen_mlx(data);
 		get_julia_value(data, str);
 		julia(data);
 		hook_julia(*data);

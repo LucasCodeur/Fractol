@@ -44,7 +44,7 @@ MLX := $(MLX_DIR)libmlx.a $(MLX_DIR)libmlx_Linux.a
 
 all : $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX) 
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(INC) $^ $(LIBS) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/fractol.h
@@ -67,6 +67,8 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean $(NAME)
+
+force: 
 
 -include $(DEP)
 

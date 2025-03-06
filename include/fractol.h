@@ -13,9 +13,9 @@
 #ifndef FRACTOL_H 
 # define FRACTOL_H
 # define SCALE 270
-# define WIDTH 500
-# define HEIGHT 500
-# define MAX_ITER 50
+# define WIDTH 1250
+# define HEIGHT 1250
+# define MAX_ITER 2000
 
 # define MIN_RE_J -2.0
 # define MAX_RE_J 2.0
@@ -31,12 +31,14 @@
 # define MAX_SCALE 1000.0
 # define MIN_SCALE 0.0001
 # define MAX_DOUBLE 1.797693e+308
-# define MIN_DOUBLE 2.225074e-308
+# define MIN_DOUBLE -1.797693e+308
+
 
 # include "../src/libft/libft.h"
 # include "../minilibx-linux/minilibx-linux/mlx.h"
 # include <math.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct s_img
 {
@@ -69,6 +71,8 @@ typedef struct s_mlx
 	void	*mlx_win;
 	t_img	img;
 	double	scale;
+	int		max_height;
+	int		max_width;
 }				t_mlx;
 
 typedef struct s_decimal_nb
@@ -83,7 +87,7 @@ typedef struct s_decimal_nb
 }				t_decimal_nb;
 //MLX
 void		init_mlx(t_mlx *t_mlx);
-void		init_screen_mlx(t_mlx *mlx);
+void		init_screen_mlx(t_mlx *data);
 void		free_img(t_mlx *t_mlx);
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
@@ -101,10 +105,11 @@ void		mandelbrot(t_mlx *window);
 void		julia(t_mlx *win);
 
 //Fractal choice
-void		fractal_choice(int argc, char **str, t_mlx *win);
+void		fractal_choice(int argc, char **str, t_mlx *data);
 
 // UTILS
 long double	ft_atod(char *str);
+int			ft_str_isdigit(char *str);
 
 // Errors
 void		error_message(void);

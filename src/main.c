@@ -15,19 +15,10 @@
 int	main(int argc, char **argv)
 {
 	t_mlx	data;
-	int		max_width;
-	int		max_height;
 
 	if (argc < 2)
 	{
 		error_message();
-		return (1);
-	}
-	init_screen_mlx(&data);
-	mlx_get_screen_size(data.mlx, &max_width, &max_height);
-	if (!data.mlx || !data.mlx_win || WIDTH > max_width || HEIGHT > max_height)
-	{
-		free_img(&data);
 		return (1);
 	}
 	fractal_choice(argc, argv, &data);

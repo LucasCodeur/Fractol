@@ -46,7 +46,7 @@ static void	julia_formula(t_cn c, size_t *i, t_cn z)
 	t_cn	temp;
 
 	temp.r = 0;
-	while (z.r * z.r + z.i * z.i < 4 && *i < MAX_ITER)
+	while (z.r * z.r + z.i * z.i <= 4 && *i < MAX_ITER)
 	{
 		temp.r = z.r;
 		z.r = z.r * z.r - z.i * z.i + c.r;
